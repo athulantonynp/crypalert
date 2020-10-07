@@ -29,6 +29,8 @@ repositories {
 }
 
 dependencies {
+    def koin_version = '2.1.6'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "io.ktor:ktor-server-netty:$ktor_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
@@ -41,4 +43,6 @@ dependencies {
 
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
 
+    implementation "org.koin:koin-core:$koin_version"
+    implementation "org.koin:koin-ktor:$koin_version"
 }

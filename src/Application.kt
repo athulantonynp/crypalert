@@ -1,5 +1,6 @@
 package app.wzrx
 
+import app.wzrx.di.commonModules
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
@@ -9,6 +10,8 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.koin.java.KoinJavaComponent.inject
+import org.koin.ktor.ext.inject
 import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -38,6 +41,9 @@ fun Application.module(testing: Boolean = false) {
         }
     }
 
+    install(org.koin.ktor.ext.Koin){ modules(commonModules) }
+
+    val okHttp:OkHttpClient by inject()
 
     routing {
         get("/") {
@@ -45,7 +51,7 @@ fun Application.module(testing: Boolean = false) {
         }
 
         get("/stat"){
-            val okHttp= OkHttpClient()
+
             val request = Request.Builder()
                 .url("http://www.google.com")
                 .build()
