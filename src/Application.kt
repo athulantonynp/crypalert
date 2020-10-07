@@ -1,6 +1,7 @@
 package app.wzrx
 
 import app.wzrx.di.commonModules
+import app.wzrx.modules.MarketFetcher
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
@@ -43,16 +44,18 @@ fun Application.module(testing: Boolean = false) {
 
     install(org.koin.ktor.ext.Koin){ modules(commonModules) }
 
-    val okHttp:OkHttpClient by inject()
+    val fetcher:MarketFetcher by inject()
+    fetcher.start("ltcinr")
 
-    routing {
+   /* routing {
         get("/") {
             call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
         }
 
         get("/stat"){
 
-            val request = Request.Builder()
+
+          *//*  val request = Request.Builder()
                 .url("http://www.google.com")
                 .build()
             var response=okHttp.newCall(request).execute()
@@ -61,8 +64,8 @@ fun Application.module(testing: Boolean = false) {
                 call.respondText ( body, contentType = ContentType.Text.Html)
             }else{
                 call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
-            }
+            }*//*
         }
-    }
+    }*/
 }
 
